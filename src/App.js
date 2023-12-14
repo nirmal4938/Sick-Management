@@ -1,8 +1,12 @@
 import React from "react";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import {
+  Navigate,
+  Route,
+  BrowserRouter as Router,
+  Routes,
+} from "react-router-dom";
 import ApplyLeave from "./components/ApplyLeave";
 import CreateUser from "./components/CreateUser";
-import Dashboard from "./components/Dashboard";
 import Layout from "./components/Layout";
 
 function App() {
@@ -25,14 +29,7 @@ function App() {
             </Layout>
           }
         />
-        <Route
-          path="/dashboard"
-          element={
-            <Layout>
-              <Dashboard />
-            </Layout>
-          }
-        />
+        <Route path="/" element={<Navigate to="/create-user" />} />
       </Routes>
     </Router>
   );
