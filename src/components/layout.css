@@ -1,0 +1,14 @@
+/* client/src/components/Layout.css */
+@media (max-width: 768px) {
+    div {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        display: none;
+    }
+
+    .aside-content {
+        margin-left: 0px;
+    }
+}
