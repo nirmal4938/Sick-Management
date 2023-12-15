@@ -127,6 +127,8 @@ const ApplyLeave = () => {
           }),
         });
 
+        console.log("Response", response);
+
         if (response.ok) {
           setSuccessMessage("Leave application submitted successfully");
           setFormData({
@@ -137,7 +139,10 @@ const ApplyLeave = () => {
           }); // Clear the form
         } else {
           const data = await response.json();
+          // console.log("Data", data.message);
+
           setErrors({ apiError: data.message });
+          setSuccessMessage("");
         }
       } catch (error) {
         console.error("Error submitting leave application:", error.message);
