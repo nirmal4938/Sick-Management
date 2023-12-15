@@ -3,7 +3,7 @@ const Leave = require("../models/Leave");
 const User = require("../models/User");
 
 exports.applyLeave = async (req, res) => {
-  console.log("Re.body", req.body);
+  // console.log("Re.body", req.body);
   try {
     const { username, leaveType, duration, user_id } = req.body;
     const user = await User.findOne({ _id: user_id });
@@ -21,11 +21,14 @@ exports.applyLeave = async (req, res) => {
 
     // Check if the user has sufficient leave balance
     if (leaveType === "Casual Leave" && user.casualLeaves < numberOfDays) {
-      return res.status(500).json({ error: "Insufficient casual leaves" });
+      console.log("Insufficient casual leaves", user.casualLeaves);
+      return res.status(400).json({ message: "Insufficient casual leaves" });
     }
 
     if (leaveType === "Sick Leave" && user.sickLeaves < numberOfDays) {
-      return res.status(500).json({ error: "Insufficient sick leaves" });
+      console.log("Insufficient sick leaves", user.sickLeaves);
+
+      return res.status(400).json({ message: "Insufficient sick leaves" });
     }
 
     // Save leave application details in the database
@@ -39,7 +42,7 @@ exports.applyLeave = async (req, res) => {
       user_id: user._id,
     });
 
-    await leave.save();
+    let result = await leave.save();
 
     // Deduct leaves from the user's balance
     if (leaveType === "Casual Leave") {
@@ -50,10 +53,10 @@ exports.applyLeave = async (req, res) => {
 
     await user.save();
 
-    res.json({ message: "Leave applied successfully" });
+    res.json({ message: "Leave applied successfully", data: result });
   } catch (error) {
     console.error("Error applying leave:", error);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ error: error.message });
   }
 };
 
