@@ -8,7 +8,8 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch("http://localhost:5000/user/users"); // Replace with your API endpoint
+        const response = await fetch("http://localhost:5000/user/users");
+        console.log("response", response);
         if (!response.ok) {
           throw new Error(
             `Failed to fetch users: ${response.status} ${response.statusText}`
@@ -24,7 +25,7 @@ const Dashboard = () => {
 
     fetchUsers();
   }, []);
-  console.log("users", users);
+  // console.log("users", users);
   return (
     <div>
       <h2 style={{ display: "flex", justifyContent: "center" }}>
