@@ -86,16 +86,16 @@ exports.getAllLeaves = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
-exports.getUserLeaves = async (req, res) => {
-  try {
-    const { username } = req.params;
+// exports.getUserLeaves = async (req, res) => {
+//   try {
+//     const { username } = req.params;
 
-    // Fetch leave records from the database based on the username
-    const userLeaves = await Leave.find({ username });
+//     // Fetch leave records from the database based on the username
+//     const userLeaves = await Leave.find({ username });
 
-    res.json(userLeaves);
-  } catch (error) {
-    console.error("Error fetching user leaves:", error);
-    res.status(500).json({ message: "Internal Server Error" });
-  }
-};
+//     res.json(userLeaves);
+//   } catch (error) {
+//     console.error("Error fetching user leaves:", error);
+//     res.status(500).json({ message: "Internal Server Error" });
+//   }
+// };
